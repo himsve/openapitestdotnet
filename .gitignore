@@ -160,3 +160,4 @@ x64/Debug/netcoreapp3.1/zh-Hant/Microsoft.VisualStudio.TestPlatform.ObjectModel.
 .vs/openapitestdotnet/v16/.suo
 .vs/openapitestdotnet/v16/TestStore/0/000.testlog
 .vs/openapitestdotnet/v16/TestStore/0/testlog.manifest
+x64/Debug/netcoreapp3.1/nunit_random_seed.tmp
