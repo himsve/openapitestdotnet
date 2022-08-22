@@ -14,18 +14,29 @@ namespace openapinunit
         {
         }
 
-        [Test]
-        public void TransformerGetAsyncOpenApiV2()
+        [TestCase(7912, 4937)]
+        [TestCase(4258, 25832)]
+        public void TransformerGetAsyncOpenApiV2(int sourceEpsg, int targetEpsg)
         {
             using (var httpClient = new System.Net.Http.HttpClient())
             {
+                OpenApi.OpenApiV2.Epsg source = (OpenApi.OpenApiV2.Epsg)sourceEpsg;
+                OpenApi.OpenApiV2.Epsg target = (OpenApi.OpenApiV2.Epsg)targetEpsg;
+
                 var openApi2 = new OpenApi.OpenApiV2.TransformerClient(httpClient);
-                var res = openApi2.GetAsync(10d, 60d, 0d, 0d, OpenApi.OpenApiV2.Epsg._4258, OpenApi.OpenApiV2.Epsg._25832).Result;
-                
+
+                var x = NormalDist.RandNormal(10d, 1d);
+                var y = NormalDist.RandNormal(60d, 1d);
+                var z = NormalDist.RandNormal(100d, 10d);
+                var t = NormalDist.RandNormal(2020d, 2d);
+
+                var res = openApi2.GetAsync(x, y, z, t, source, target);                
+ 
                 Assert.IsNotNull(res);
-            }          
+            }
         }
 
+        [TestCase(7912, 4937)]
         [TestCase(4258, 25832)]
         public void TransformerPostAsyncOpenApiV2(int sourceEpsg, int targetEpsg)
         {
@@ -42,7 +53,8 @@ namespace openapinunit
                     {  
                         X = NormalDist.RandNormal(10d, 1d),
                         Y = NormalDist.RandNormal(60d, 1d),
-                        Z = NormalDist.RandNormal(100d, 10d)
+                        Z = NormalDist.RandNormal(100d, 10d),
+                        T = NormalDist.RandNormal(2020d, 2d)
                     }
                 };
                 
@@ -52,6 +64,7 @@ namespace openapinunit
             }                         
         }
 
+        [TestCase(7912, 4937)]
         [TestCase(4258, 25832)]
         public void StressTestPostAsyncOpenApiV2(int sourceEpsg, int targetEpsg)
         {
@@ -71,7 +84,8 @@ namespace openapinunit
                     {
                         X = NormalDist.RandNormal(10d, 1d),
                         Y = NormalDist.RandNormal(60d, 1d),
-                        Z = NormalDist.RandNormal(100d, 10d)
+                        Z = NormalDist.RandNormal(100d, 10d),
+                        T = NormalDist.RandNormal(2020d, 2d)
                     });
                 }
 
@@ -81,7 +95,14 @@ namespace openapinunit
             }       
         }
 
+        [TestCase(0)]
+        [TestCase(1)]
         [TestCase(2)]
+        [TestCase(3)]
+        [TestCase(4)]
+        [TestCase(5)]
+        [TestCase(6)]
+        [TestCase(7)]
         public void ProjeksjonerGetAsyncOpenApiV2(int coordSystem)
         {
             var cs = (OpenApi.OpenApiV2.CoordinateSystem)coordSystem;
