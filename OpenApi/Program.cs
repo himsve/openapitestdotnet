@@ -5,14 +5,14 @@ namespace OpenApi
 {
     class Program
     {
-        public static bool WriteToConsole = false;
+        public static bool WriteToConsole = true;
 
         static void Main(string[] args)
         {
             Console.WriteLine("Transformation is started");
 
-            // Transform(4258, 4312, 10d, 60d);
-            // Transform(4258, 25832, 10d, 60d);            
+             // Transform(4258, 4312, 10d, 60d);
+             //  Transform(4258, 25832, 10d, 60d);
 
             TestOpenApiV1();
             
@@ -57,13 +57,21 @@ namespace OpenApi
                 var t = 2020d;
 
                 var res = oa.GetAsync(xrand, yrand, z, t, OpenApiV1.Epsg._4258, OpenApiV1.Epsg._25832).Result;
-                // var res = oa.GetAsync(xrand, yrand, z, t, OpenApiV1.Epsg._7912, OpenApiV1.Epsg._4937).Result;                
+                // var res = oa.GetAsync(xrand, yrand, z, t, OpenApiV1.Epsg._7912, OpenApiV1.Epsg._4937).Result;
 
                 if (WriteToConsole)
                     Console.WriteLine(
                         $"Input:  x {xrand:F9} y {yrand:F9} z {z:F5} t {t:F2}\n\r" +
                         $"Output: x {res.X:F9} y {res.Y:F9} z {res.Z:F5}");
             }            
-        }        
+        }
+        
+        public static void TestOpenApiV2()
+        {
+            using var httpClient = new System.Net.Http.HttpClient();
+
+            var oa = new OpenApiV2.TransformerClient(httpClient);
+
+        }
     }
 }

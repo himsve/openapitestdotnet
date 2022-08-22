@@ -41,5 +41,68 @@
         <member name="T:OpenApi.OpenApiV1.Epsg">
             <summary>An enumeration.</summary>
         </member>
+        <member name="M:OpenApi.OpenApiV2.TransformerClient.GetAsync(System.Double,System.Double,System.Nullable{System.Double},System.Nullable{System.Double},OpenApi.OpenApiV2.Epsg,OpenApi.OpenApiV2.Epsg)">
+            <summary>Transformer Ett Koordinat</summary>
+            <returns>Successful Response</returns>
+            <exception cref="T:OpenApi.OpenApiV2.SwaggerException">A server side error occurred.</exception>
+        </member>
+        <member name="M:OpenApi.OpenApiV2.TransformerClient.GetAsync(System.Double,System.Double,System.Nullable{System.Double},System.Nullable{System.Double},OpenApi.OpenApiV2.Epsg,OpenApi.OpenApiV2.Epsg,System.Threading.CancellationToken)">
+            <summary>Transformer Ett Koordinat</summary>
+            <returns>Successful Response</returns>
+            <exception cref="T:OpenApi.OpenApiV2.SwaggerException">A server side error occurred.</exception>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        </member>
+        <member name="M:OpenApi.OpenApiV2.TransformerClient.PostAsync(OpenApi.OpenApiV2.Epsg,OpenApi.OpenApiV2.Epsg,System.Collections.Generic.IEnumerable{OpenApi.OpenApiV2.CoordParams})">
+            <summary>Transformer Mange Koordinater</summary>
+            <returns>Successful Response</returns>
+            <exception cref="T:OpenApi.OpenApiV2.SwaggerException">A server side error occurred.</exception>
+        </member>
+        <member name="M:OpenApi.OpenApiV2.TransformerClient.PostAsync(OpenApi.OpenApiV2.Epsg,OpenApi.OpenApiV2.Epsg,System.Collections.Generic.IEnumerable{OpenApi.OpenApiV2.CoordParams},System.Threading.CancellationToken)">
+            <summary>Transformer Mange Koordinater</summary>
+            <returns>Successful Response</returns>
+            <exception cref="T:OpenApi.OpenApiV2.SwaggerException">A server side error occurred.</exception>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        </member>
+        <member name="M:OpenApi.OpenApiV2.ProjeksjonerClient.GetAsync(System.Nullable{OpenApi.OpenApiV2.Cat},System.Nullable{OpenApi.OpenApiV2.CoordinateSystem})">
+            <summary>Koordinatsystemer</summary>
+            <returns>Successful Response</returns>
+            <exception cref="T:OpenApi.OpenApiV2.SwaggerException">A server side error occurred.</exception>
+        </member>
+        <member name="M:OpenApi.OpenApiV2.ProjeksjonerClient.GetAsync(System.Nullable{OpenApi.OpenApiV2.Cat},System.Nullable{OpenApi.OpenApiV2.CoordinateSystem},System.Threading.CancellationToken)">
+            <summary>Koordinatsystemer</summary>
+            <returns>Successful Response</returns>
+            <exception cref="T:OpenApi.OpenApiV2.SwaggerException">A server side error occurred.</exception>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        </member>
+        <member name="T:OpenApi.OpenApiV2.Cat">
+            <summary>An enumeration.</summary>
+        </member>
+        <member name="P:OpenApi.OpenApiV2.CoordParams.X">
+            <summary>Lengdegrad / øst / X</summary>
+        </member>
+        <member name="P:OpenApi.OpenApiV2.CoordParams.Y">
+            <summary>Breddegrad / nord / Y</summary>
+        </member>
+        <member name="P:OpenApi.OpenApiV2.CoordParams.Z">
+            <summary>Høyde / Z</summary>
+        </member>
+        <member name="P:OpenApi.OpenApiV2.CoordParams.T">
+            <summary>Tid / Epoke / T</summary>
+        </member>
+        <member name="P:OpenApi.OpenApiV2.CoordResult.X">
+            <summary>Lengdegrad / øst / X</summary>
+        </member>
+        <member name="P:OpenApi.OpenApiV2.CoordResult.Y">
+            <summary>Breddegrad / nord / Y</summary>
+        </member>
+        <member name="P:OpenApi.OpenApiV2.CoordResult.Z">
+            <summary>Høyde / Z</summary>
+        </member>
+        <member name="T:OpenApi.OpenApiV2.Epsg">
+            <summary>An enumeration.</summary>
+        </member>
+        <member name="T:OpenApi.OpenApiV2.CoordinateSystem">
+            <summary>An enumeration.</summary>
+        </member>
     </members>
 </doc>
