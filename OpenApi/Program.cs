@@ -71,7 +71,6 @@ namespace OpenApi
             using var httpClient = new System.Net.Http.HttpClient();
 
             var oa = new OpenApiV2.TransformerClient(httpClient);
-
         }
     }
 }

@@ -1,0 +1,514 @@
+﻿{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Transformering",
+    "description": "Transformer koordinater mellom forskjellige koordinatsystemer.",
+    "version": "1.5.1"
+  },
+  "servers": [
+    {
+      "url": "/transformering/v1"
+    }
+  ],
+  "paths": {
+    "/transformer": {
+      "get": {
+        "tags": [
+          "transformering"
+        ],
+        "summary": "Transformer Ett Koordinat",
+        "description": "**Transformer ett koordinat**",
+        "operationId": "Transformer_ett_koordinat_transformer_get",
+        "parameters": [
+          {
+            "name": "x",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "title": "X",
+              "type": "number"
+            }
+          },
+          {
+            "name": "y",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "title": "Y",
+              "type": "number"
+            }
+          },
+          {
+            "name": "z",
+            "in": "query",
+            "schema": {
+              "title": "Z",
+              "type": "number"
+            }
+          },
+          {
+            "name": "t",
+            "in": "query",
+            "schema": {
+              "title": "T",
+              "type": "number"
+            }
+          },
+          {
+            "name": "fra",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Epsg"
+            }
+          },
+          {
+            "name": "til",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Epsg"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CoordResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "transformering"
+        ],
+        "summary": "Transformer Mange Koordinater",
+        "description": "**Transformer mange koordinater**",
+        "operationId": "Transformer_mange_koordinater_transformer_post",
+        "parameters": [
+          {
+            "name": "fra",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Epsg"
+            }
+          },
+          {
+            "name": "til",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Epsg"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Coords",
+                "type": "array",
+                "default": [],
+                "maxItems": 10000,
+                "items": {
+                  "$ref": "#/components/schemas/CoordParams"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Transformer Mange Koordinater Transformer Post",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CoordResult"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projeksjoner": {
+      "get": {
+        "tags": [
+          "informasjon"
+        ],
+        "summary": "Koordinatsystemer",
+        "description": "**Tilgjengelige koordinatsystemer**",
+        "operationId": "Koordinatsystemer_projeksjoner_get",
+        "parameters": [
+          {
+            "name": "kategori",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/Cat"
+            }
+          },
+          {
+            "name": "system",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/System"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Koordinatsystemer Projeksjoner Get",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EpsgResult"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Cat": {
+        "title": "Cat",
+        "type": "string",
+        "description": "An enumeration.",
+        "enum": [
+          "enkel"
+        ]
+      },
+      "CoordParams": {
+        "title": "Parametere",
+        "type": "object",
+        "required": [
+          "x",
+          "y"
+        ],
+        "properties": {
+          "x": {
+            "title": "X",
+            "type": "number",
+            "description": "Lengdegrad / øst / X"
+          },
+          "y": {
+            "title": "Y",
+            "type": "number",
+            "description": "Breddegrad / nord / Y"
+          },
+          "z": {
+            "title": "Z",
+            "type": "number",
+            "description": "Høyde / Z"
+          },
+          "t": {
+            "title": "T",
+            "type": "number",
+            "description": "Tid / Epoke / T"
+          }
+        }
+      },
+      "CoordResult": {
+        "title": "Resultat",
+        "type": "object",
+        "required": [
+          "x",
+          "y"
+        ],
+        "properties": {
+          "x": {
+            "title": "X",
+            "type": "number",
+            "description": "Lengdegrad / øst / X"
+          },
+          "y": {
+            "title": "Y",
+            "type": "number",
+            "description": "Breddegrad / nord / Y"
+          },
+          "z": {
+            "title": "Z",
+            "type": "number",
+            "description": "Høyde / Z"
+          }
+        }
+      },
+      "Epsg": {
+        "title": "Epsg",
+        "type": "string",
+        "description": "An enumeration.",
+        "enum": [
+          "4258",
+          "4937",
+          "5942",
+          "6144",
+          "4936",
+          "25831",
+          "25832",
+          "25833",
+          "25834",
+          "25835",
+          "25836",
+          "6171",
+          "6172",
+          "6173",
+          "6174",
+          "6175",
+          "6176",
+          "5971",
+          "5972",
+          "5973",
+          "5974",
+          "5975",
+          "5976",
+          "5105",
+          "5106",
+          "5107",
+          "5108",
+          "5109",
+          "5110",
+          "5111",
+          "5112",
+          "5113",
+          "5114",
+          "5115",
+          "5116",
+          "5117",
+          "5118",
+          "5119",
+          "5120",
+          "5121",
+          "5122",
+          "5123",
+          "5124",
+          "5125",
+          "5126",
+          "5127",
+          "5128",
+          "5129",
+          "5130",
+          "6145",
+          "6146",
+          "6147",
+          "6148",
+          "6149",
+          "6150",
+          "6151",
+          "6152",
+          "6153",
+          "6154",
+          "6155",
+          "6156",
+          "6157",
+          "6158",
+          "6159",
+          "6160",
+          "6161",
+          "6162",
+          "6163",
+          "6164",
+          "6165",
+          "6166",
+          "6167",
+          "6168",
+          "6169",
+          "6170",
+          "5945",
+          "5946",
+          "5947",
+          "5948",
+          "5949",
+          "5950",
+          "5951",
+          "5952",
+          "5953",
+          "5954",
+          "5955",
+          "5956",
+          "5957",
+          "5958",
+          "5959",
+          "5960",
+          "5961",
+          "5962",
+          "5963",
+          "5964",
+          "5965",
+          "5966",
+          "5967",
+          "5968",
+          "5969",
+          "5970",
+          "5941",
+          "5776",
+          "9672",
+          "4273",
+          "27391",
+          "27392",
+          "27393",
+          "27394",
+          "27395",
+          "27396",
+          "27397",
+          "27398",
+          "9000",
+          "7912",
+          "7789",
+          "4230",
+          "23031",
+          "23032",
+          "23033",
+          "23034",
+          "23035",
+          "23036",
+          "4326"
+        ]
+      },
+      "EpsgResult": {
+        "title": "Projeksjon",
+        "type": "object",
+        "required": [
+          "degrees",
+          "epsg",
+          "name"
+        ],
+        "properties": {
+          "degrees": {
+            "title": "Degrees",
+            "type": "boolean"
+          },
+          "epsg": {
+            "title": "Epsg",
+            "type": "integer"
+          },
+          "info": {
+            "title": "Info",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          }
+        }
+      },
+      "HTTPValidationError": {
+        "title": "HTTPValidationError",
+        "type": "object",
+        "properties": {
+          "detail": {
+            "title": "Detail",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            }
+          }
+        }
+      },
+      "System": {
+        "title": "System",
+        "type": "string",
+        "description": "An enumeration.",
+        "enum": [
+          "CD",
+          "ED50",
+          "ETRS89",
+          "ITRF2014",
+          "NGO48",
+          "NN54",
+          "NN2000",
+          "WGS84"
+        ]
+      },
+      "ValidationError": {
+        "title": "ValidationError",
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "properties": {
+          "loc": {
+            "title": "Location",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            }
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "informasjon",
+      "description": "Informasjon"
+    },
+    {
+      "name": "transformering",
+      "description": "Transformering"
+    }
+  ]
+}
