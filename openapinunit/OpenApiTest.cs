@@ -36,9 +36,9 @@ namespace openapinunit
             }
         }
 
-        [TestCase(7912, 4937)]
-        [TestCase(4258, 25832)]
-        public void TransformerPostAsyncOpenApiV3(int sourceEpsg, int targetEpsg)
+        [TestCase(7912, 4937, 10000)]
+        [TestCase(4258, 25832, 10000)]
+        public void TransformerPostAsyncOpenApiV3(int sourceEpsg, int targetEpsg, int samples = 100)
         {
             using (var httpClient = new System.Net.Http.HttpClient())
             {
@@ -64,12 +64,11 @@ namespace openapinunit
             }                         
         }
 
-        [TestCase(7912, 4937)]
-        [TestCase(4258, 25832)]
-        public void StressTestPostAsyncOpenApiV3(int sourceEpsg, int targetEpsg)
+        [TestCase(4258, 25832, 10000)]
+        [TestCase(7912, 4937, 10000)]
+        [TestCase(4258, 27393, 10000)]
+        public void StressTestPostAsyncOpenApiV3(int sourceEpsg, int targetEpsg, int samples = 100)
         {
-            int samples = 10000; // Max number of points
-
             OpenApi.OpenApiV3.Epsg source = (OpenApi.OpenApiV3.Epsg)sourceEpsg;
             OpenApi.OpenApiV3.Epsg target = (OpenApi.OpenApiV3.Epsg)targetEpsg;
 

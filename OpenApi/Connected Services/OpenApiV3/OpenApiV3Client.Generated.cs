@@ -9,9 +9,9 @@ namespace OpenApi.OpenApiV3
     #pragma warning disable
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "12.0.15.0 (NJsonSchema v9.13.22.0 (Newtonsoft.Json v12.0.0.2))")]
-    public partial class TransformerClient 
+    public partial class TransformerClient
     {
-        private string _baseUrl = "/transformering/v1";
+        private string _baseUrl = "https://ws.geonorge.no/transformering/v1";
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
     
@@ -301,7 +301,7 @@ namespace OpenApi.OpenApiV3
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "12.0.15.0 (NJsonSchema v9.13.22.0 (Newtonsoft.Json v12.0.0.2))")]
     public partial class ProjeksjonerClient 
     {
-        private string _baseUrl = "/transformering/v1";
+        private string _baseUrl = "https://ws.geonorge.no/transformering/v1";
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
     
