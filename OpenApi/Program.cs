@@ -13,10 +13,9 @@ namespace OpenApi
 
             ListEPSGCodes();
 
-
             Console.WriteLine("Transformation is started");
 
-            TestOpenApiV3();
+            TestOpenApiV1();
 
             Transform(4258, 25832, 10d, 60d);
 
@@ -32,10 +31,10 @@ namespace OpenApi
             {
                 using (var httpClient = new System.Net.Http.HttpClient())
                 {
-                    var oa = new OpenApiV3.TransformerClient(httpClient);
+                    var oa = new OpenApiV1.TransformerClient(httpClient);
                     
-                    OpenApiV3.Epsg epsgS = (OpenApiV3.Epsg)Enum.ToObject(typeof(OpenApiV3.Epsg), epsgSource);
-                    OpenApiV3.Epsg epsgT = (OpenApiV3.Epsg)Enum.ToObject(typeof(OpenApiV3.Epsg), epsgTarget);
+                    OpenApiV1.Epsg epsgS = (OpenApiV1.Epsg)Enum.ToObject(typeof(OpenApiV1.Epsg), epsgSource);
+                    OpenApiV1.Epsg epsgT = (OpenApiV1.Epsg)Enum.ToObject(typeof(OpenApiV1.Epsg), epsgTarget);
                     
                     var res = oa.GetAsync(x, y, z, t, epsgS, epsgT).Result;
                 }                
@@ -56,9 +55,9 @@ namespace OpenApi
             {
                 using (var httpClient = new System.Net.Http.HttpClient())
                 {
-                    var oa = new OpenApiV3.ProjeksjonerClient(httpClient);
+                    var oa = new OpenApiV1.ProjeksjonerClient(httpClient);
 
-                    var res = oa.GetAsync(OpenApiV3.Cat.Enkel, null);
+                    var res = oa.GetAsync(OpenApiV1.Cat.Enkel, null);
                     
                   //  if (res.IsCompleted)
                     {
@@ -79,13 +78,13 @@ namespace OpenApi
             }
         }
 
-        static void TestOpenApiV3()
+        static void TestOpenApiV1()
         {
             try
             {
                 using (var httpClient = new System.Net.Http.HttpClient())
                 {
-                    var oa = new OpenApiV3.TransformerClient(httpClient);
+                    var oa = new OpenApiV1.TransformerClient(httpClient);
                     
                     var x = 9d; var y = 60d;
                     var rand = new Random();
@@ -97,7 +96,7 @@ namespace OpenApi
                         var z = 0; //200d + rand.NextDouble()*50d;
                         var t = 2020d;
 
-                        var res = oa.GetAsync(xrand, yrand, z, t, OpenApiV3.Epsg._4258, OpenApiV3.Epsg._25832).Result;
+                        var res = oa.GetAsync(xrand, yrand, z, t, OpenApiV1.Epsg._4258, OpenApiV1.Epsg._25832).Result;
 
                         if (WriteToConsole)
                             Console.WriteLine(

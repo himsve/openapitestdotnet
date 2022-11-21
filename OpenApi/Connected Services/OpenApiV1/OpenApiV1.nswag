@@ -4,7 +4,7 @@
   "swaggerGenerator": {
     "fromSwagger": {
       "url": "https://ws.geonorge.no/transformering/v1/openapi.json",
-      "output": "OpenApiV3.nswag.json"
+      "output": "OpenApiV1.nswag.json"
     }
   },
   "codeGenerators": {

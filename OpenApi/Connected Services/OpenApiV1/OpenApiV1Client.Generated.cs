@@ -4,7 +4,7 @@
 // </auto-generated>
 //----------------------
 
-namespace OpenApi.OpenApiV3
+namespace OpenApi.OpenApiV1
 {
     #pragma warning disable
 
@@ -530,8 +530,7 @@ namespace OpenApi.OpenApiV3
         public static CoordResult FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<CoordResult>(data);
-        }
-    
+        }    
     }
     
     /// <summary>An enumeration.</summary>
